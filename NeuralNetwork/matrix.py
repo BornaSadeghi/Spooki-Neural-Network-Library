@@ -8,7 +8,7 @@ class Matrix:
 		Parameters
 		----------
 
-		rows: list
+		rows: list of lists containing numbers
 			The list of rows to initialize the matrix with.
 
 		"""
