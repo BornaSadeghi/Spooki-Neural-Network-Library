@@ -1,46 +1,57 @@
 import random
 
 class Matrix:
-	def __init__(self, rows: list):
+	def __init__(self, matrix: list):
 		"""
 		Initialize a new matrix from a list of rows.
 
 		Parameters
 		----------
 
-		rows: list of lists containing numbers
+		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
-
 		"""
 		try:
-			self.nRows, self.nCols = len(rows), len(rows[0])
+			self.numRows, self.numCols = len(matrix), len(matrix[0])
 		except:
 			raise Exception("Matrix must have at least one row and one column.")
 
-		self.mat = rows
+		self.matrix = matrix
 
 	@classmethod
-	def zeros (cls, nRows, nCols):
+	def zeros (cls, numRows, numCols):
 		"""
 		Initialize a new matrix full of zeros.
 
 		Parameters
 		----------
 
-		nRows: int
+		numRows: int
 			number of rows in the matrix
-		nCols: int
+		numCols: int
 			number of columns in the matrix
 
 		"""
-		return cls([[0 for _ in range(nCols)] for _ in range (nRows)])
+		return cls([[0 for _ in range(numCols)] for _ in range (numRows)])
 
 	@classmethod
-	def rand (cls, nRows, nCols, min=0, max=1):
+	def rand (cls, numRows, numCols, min=0, max=1):
 		"""
 		Similar to .zeros, but initialize each value with a random floating-point number.
+
+		Parameters
+		----------
+
+		numRows: int
+			number of rows in the matrix
+		numCols: int
+			number of columns in the matrix
+		min: float
+			minimum value of the random number
+		max: float
+			maximum value of the random number
 		"""
-		return cls([[random.uniform(min,max) for _ in range (nCols)] for _ in range(nRows)])
+		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
 	def get(self, row, col):
 		return self.mat[row][col]
@@ -49,6 +60,9 @@ class Matrix:
 		self.mat[row][col] = value
 
 	def __str__(self):
+		"""
+		Show the matrix in string form.
+		"""
 		s = "Matrix:\n"
 		for row in self.mat:
 			for value in row:
@@ -56,24 +70,35 @@ class Matrix:
 			s += "\n"
 		return s
 
-def activation(mat, func):
-	for i in range (mat.nRows):
-		for j in range (mat.nCols):
-			mat.set(i,j, func(mat.get(i,j)))
-	return mat
+def activation(matrix, activation_function):
+	"""
+	Run the each element of the matrix through an activation function.
 
-def product (mat1, mat2):
+	Parameters
+	----------
+
+	matrix: list of lists
+		the matrix to apply the activation function on
+	activation_function: function
+		the function to apply
+	"""
+	for i in range (matrix.numRows):
+		for j in range (matrix.numCols):
+			matrix.set(i,j, func(matrix.get(i,j)))
+	return matrix
+
+def matrix_product (matrix1, matrix2):
 	"""
 	The matrix product of two matrices.
 	"""
-	mat_product = Matrix.zeros(mat1.nRows, mat2.nCols)
-	if mat1.nCols == mat2.nRows:
-		for r in range (mat1.nRows):
-			for c in range (mat2.nCols):
-				mat_product.mat[r][c] = sum([mat1.get(r,i)*mat2.get(i,c) for i in range (mat1.nCols)])
+	if matrix1.numCols == matrix2.numRows:
+		matrix_product = Matrix.zeros(matrix1.numRows, matrix2.numCols)
+		for r in range (matrix1.numRows):
+			for c in range (matrix2.numCols):
+				matrix_product.matrix[r][c] = sum([matrix1.get(r,i)*matrix2.get(i,c) for i in range (matrix1.numCols)])
 	else:
 		raise Exception("Dimensional error")
-	return mat_product
+	return matrix_product
 
 def diagonal_product (mat1, mat2):
 	"""
@@ -81,9 +106,9 @@ def diagonal_product (mat1, mat2):
 	the nth row with the nth column. This gives us a one-dimensional result.
 	"""
 	diag_product = []
-	if mat1.nCols == mat2.nRows:
-		for r in range (mat1.nRows):
-			diag_product.append(sum([mat1.get(r,i)*mat2.get(i,r) for i in range (mat1.nCols)]))
+	if mat1.numCols == mat2.numRows:
+		for r in range (mat1.numRows):
+			diag_product.append(sum([mat1.get(r,i)*mat2.get(i,r) for i in range (mat1.numCols)]))
 	else:
 		raise Exception("Dimensional error")
 	return diag_product
