@@ -3,13 +3,15 @@ import random
 class Matrix:
 	def __init__(self, matrix: list):
 		"""
-		Initialize a new matrix from a list of rows.
+		Initialize a new 2D matrix from a list of rows.
+		So, columns are represented by the inner list, while rows are represented by the outer list.
 
 		Parameters
 		----------
 
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
+			e.g. [[1,2,3], [4,5]]
 		"""
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
