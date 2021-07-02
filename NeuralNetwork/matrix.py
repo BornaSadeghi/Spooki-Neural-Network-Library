@@ -8,7 +8,6 @@ class Matrix:
 
 		Parameters
 		----------
-
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
 			e.g. [[1,2,3], [4,5]]
@@ -27,7 +26,6 @@ class Matrix:
 
 		Parameters
 		----------
-
 		numRows: int
 			number of rows in the matrix
 		numCols: int
@@ -43,7 +41,6 @@ class Matrix:
 
 		Parameters
 		----------
-
 		numRows: int
 			number of rows in the matrix
 		numCols: int
@@ -61,7 +58,6 @@ class Matrix:
 
 		Parameters
 		----------
-
 		row: int
 			The row to get the value from
 		col: int
@@ -78,7 +74,6 @@ class Matrix:
 
 		Parameters
 		----------
-
 		row: int
 			The row to set the value at
 		col: int
@@ -100,23 +95,6 @@ class Matrix:
 			s += "\n"
 		return s
 
-def activation(matrix, activation_function):
-	"""
-	Run the each element of the matrix through an activation function.
-
-	Parameters
-	----------
-
-	matrix: list of lists
-		the matrix to apply the activation function on
-	activation_function: function
-		the function to apply
-	"""
-	for i in range (matrix.numRows):
-		for j in range (matrix.numCols):
-			matrix.set(i,j, func(matrix.get(i,j)))
-	return matrix
-
 def matrix_product (matrix1, matrix2):
 	"""
 	The matrix product of two matrices.
@@ -130,23 +108,26 @@ def matrix_product (matrix1, matrix2):
 		raise Exception("Dimensional error")
 	return matrix_product
 
-def diagonal_product (mat1, mat2):
+def dot (list1, list2):
 	"""
-	Matrix multiplication but instead of multiplying all rows with all columns, multiply 
-	the nth row with the nth column. This gives us a one-dimensional result.
-	"""
-	diag_product = []
-	if mat1.numCols == mat2.numRows:
-		for r in range (mat1.numRows):
-			diag_product.append(sum([mat1.get(r,i)*mat2.get(i,r) for i in range (mat1.numCols)]))
-	else:
-		raise Exception("Dimensional error")
-	return diag_product
-
-def sum_products (list1, list2):
-	"""
-	The sum of the products of two lists.
+	The dot product (sum of the products) of two lists.
 	"""
 	if len(list1) != len(list2):
-		raise Exception("Tried to find the sum of products of two lists of different sizes")
+		raise Exception("Tried to find the dot product of two lists of different lengths")
 	return sum([list1[i]*list2[i] for i in range (len(list1))])
+
+def activation(matrix, activation_function):
+	"""
+	Run the each element of the matrix through an activation function.
+
+	Parameters
+	----------
+	matrix: list of lists
+		the matrix to apply the activation function on
+	activation_function: function
+		the function to apply
+	"""
+	for i in range (matrix.numRows):
+		for j in range (matrix.numCols):
+			matrix.set(i,j, func(matrix.get(i,j)))
+	return matrix
