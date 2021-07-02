@@ -56,14 +56,42 @@ class Matrix:
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
 	def get(self, row, col):
-		return self.mat[row][col]
+		"""
+		Retrieve the value at (row, col) inside the matrix.
+
+		Parameters
+		----------
+
+		row: int
+			The row to get the value from
+		col: int
+			The column to get the value from
+		"""
+		try:
+			return self.mat[row][col]
+		except:
+			raise Exception("row or col is not inside the matrix boundaries.")
 
 	def set(self, row, col, value):
-		self.mat[row][col] = value
+		"""
+		Set the value at (row, col) inside the matrix.
+
+		Parameters
+		----------
+
+		row: int
+			The row to set the value at
+		col: int
+			The column to set the value at
+		"""
+		try:
+			self.mat[row][col] = value
+		except:
+			raise Exception("row or col is not inside the matrix boundaries.")
 
 	def __str__(self):
 		"""
-		Show the matrix in string form.
+		Return the matrix in string form.
 		"""
 		s = "Matrix:\n"
 		for row in self.mat:
