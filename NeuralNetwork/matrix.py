@@ -30,7 +30,6 @@ class Matrix:
 			number of rows in the matrix
 		numCols: int
 			number of columns in the matrix
-
 		"""
 		return cls([[0 for _ in range(numCols)] for _ in range (numRows)])
 
@@ -52,12 +51,28 @@ class Matrix:
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
+	def get2dArray(self):
+		return self.matrix
+
 	def getRow(self, rowIndex):
+		"""
+		Return a specific row of values in the matrix.
+
+		Parameters
+		----------
+		rowIndex: The index of the row to retrieve.
+		"""
 		return self.matrix[rowIndex]
-		pass
 
 	def getCol(self, colIndex):
-		pass
+		"""
+		Return a specific column of values in the matrix.
+
+		Parameters
+		----------
+		colIndex: The index of the column to retrieve.
+		"""
+		return self.matrix[ (row[colIndex] for row in self.matrix) ]
 
 	def get(self, row, col):
 		"""
@@ -96,7 +111,7 @@ class Matrix:
 		Return the matrix in string form.
 		"""
 		s = "Matrix:\n"
-		for row in self.mat:
+		for row in self.matrix:
 			for value in row:
 				s += "%8.4f" %value
 			s += "\n"
