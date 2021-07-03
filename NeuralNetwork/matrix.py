@@ -122,6 +122,14 @@ class Matrix:
 			s += "\n"
 		return s
 
+def dot (list1, list2):
+	"""
+	The dot product (sum of the products) of two lists.
+	"""
+	if len(list1) != len(list2):
+		raise Exception("Tried to find the dot product of two lists of different lengths")
+	return sum([list1[i]*list2[i] for i in range (len(list1))])
+
 def matrix_product (matrix1, matrix2):
 	"""
 	The matrix product of two matrices.
@@ -130,18 +138,10 @@ def matrix_product (matrix1, matrix2):
 		matrix_product = Matrix.zeros(matrix1.numRows, matrix2.numCols)
 		for r in range (matrix1.numRows):
 			for c in range (matrix2.numCols):
-				matrix_product.matrix[r][c] = sum([matrix1.get(r,i)*matrix2.get(i,c) for i in range (matrix1.numCols)])
+				matrix_product.matrix[r][c] = dot(matrix1.getRow(r), matrix2.getCol(c))
 	else:
 		raise Exception("Dimensional error")
 	return matrix_product
-
-def dot (list1, list2):
-	"""
-	The dot product (sum of the products) of two lists.
-	"""
-	if len(list1) != len(list2):
-		raise Exception("Tried to find the dot product of two lists of different lengths")
-	return sum([list1[i]*list2[i] for i in range (len(list1))])
 
 def activation(matrix, activation_function):
 	"""
