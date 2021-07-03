@@ -1,4 +1,4 @@
-from NeuralNetwork.matrix import Matrix
+from NeuralNetwork.matrix import Matrix, dot, matrix_product
 import unittest
 
 class TestZeros(unittest.TestCase):
@@ -21,3 +21,12 @@ class TestGetRow(unittest.TestCase):
 class TestGetColumn(unittest.TestCase):
     def test_get_col(self):
         self.assertEqual(Matrix([[1,2,3], [4,5,6]]).getCol(2), [3,6])
+
+class TestDot(unittest.TestCase):
+    def test_dot_product(self):
+        self.assertEqual(dot([1,2,3], [4,5,6]), 32)
+        self.assertEqual(dot([1,0,-1], [1,1,1]), 0)
+    
+    def test_different_lengths(self):
+        with self.assertRaises(Exception):
+            dot([0,1], [2,3,4])
