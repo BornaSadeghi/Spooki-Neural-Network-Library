@@ -11,6 +11,8 @@ class Matrix:
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
 			e.g. [[1,2,3], [4,5]]
+		
+		TODO Handle matrices with rows/columns of different sizes (don't allow them)
 		"""
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
@@ -51,6 +53,9 @@ class Matrix:
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
+	def shape(self):
+		return len(self.matrix), len(self.matrix[0])
+
 	def get2dArray(self):
 		return self.matrix
 
@@ -72,7 +77,7 @@ class Matrix:
 		----------
 		colIndex: The index of the column to retrieve.
 		"""
-		return self.matrix[ (row[colIndex] for row in self.matrix) ]
+		return [ row[colIndex] for row in self.matrix ]
 
 	def get(self, row, col):
 		"""
