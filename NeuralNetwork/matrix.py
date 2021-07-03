@@ -52,6 +52,13 @@ class Matrix:
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
+	def getRow(self, rowIndex):
+		return self.matrix[rowIndex]
+		pass
+
+	def getCol(self, colIndex):
+		pass
+
 	def get(self, row, col):
 		"""
 		Retrieve the value at (row, col) inside the matrix.
