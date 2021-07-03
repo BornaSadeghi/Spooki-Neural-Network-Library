@@ -1,4 +1,4 @@
-from nn2 import NeuralNetwork
+from neural_network import NeuralNetwork
 
 nn = NeuralNetwork([4,3,6])
 

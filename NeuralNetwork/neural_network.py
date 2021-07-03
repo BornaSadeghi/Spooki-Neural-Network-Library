@@ -1,21 +1,21 @@
-from matrix import Matrix, product, activation
-from activations import sigmoid
-# Tensor-based modelling
+from NeuralNetwork.matrix import Matrix, matrix_product, activation
+from NeuralNetwork.activations import sigmoid
 
 class NeuralNetwork:
     def __init__(self, shape=[1]):
         """
         Parameters
         ----------
-
         shape: list <int>
         The shape of the neural network, where the i-th number is the number of nodes in the i-th layer
         """
         self.shape = shape
         
         self.weights = []
+
+        # Randomly initialized weights
         for i in range (len(shape)-1):
-            self.weights.append(Matrix.rand(shape[i], shape[i+1]))
+            self.weights.append(Matrix.rand(shape[i+1], shape[i]))
     
     def feedforward (self, x):
         """
@@ -33,7 +33,7 @@ class NeuralNetwork:
 
         # iterate through layers
         for layer_idx in range(len(self.shape)-1):
-            x = activation(product(x, self.weights[layer_idx]), sigmoid)
+            x = activation(matrix_product(x, self.weights[layer_idx]), sigmoid)
 
         return x
 

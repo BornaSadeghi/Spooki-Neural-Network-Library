@@ -1,6 +1,8 @@
 from NeuralNetwork.matrix import Matrix, dot, matrix_product
 import unittest
 
+# python3 -m unittest matrix_test.py
+
 class TestZeros(unittest.TestCase):
     def test_zeros_result(self):
         self.assertEqual(Matrix.zeros(2,3).get2dArray(), Matrix([[0,0,0], [0,0,0]]).get2dArray())
