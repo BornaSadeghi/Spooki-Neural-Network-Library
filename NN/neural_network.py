@@ -33,7 +33,6 @@ class NeuralNetwork:
 
         # iterate through layers
         for layer_idx in range(len(self.shape)-1):
-            print(x, self.weights[layer_idx])
             x = activation(matrix_product(self.weights[layer_idx], x), sigmoid)
 
         return x

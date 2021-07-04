@@ -1,4 +1,5 @@
 import math, random
+from activations import linear
 
 def normalizeColour(colour):
     return colour[0]/255, colour[1]/255, colour[2]/255
@@ -6,7 +7,7 @@ def normalizeColour(colour):
 # Node/Perceptron class
 
 class Node:
-    def __init__(self, numInputs, activationFunc=noFunc, learningRate=0.1):
+    def __init__(self, numInputs, activationFunc=linear, learningRate=0.1):
         self.weights = [random.randint(-1,1) for _ in range (numInputs)]
         self.activationFunc = activationFunc
         self.learningRate = learningRate
