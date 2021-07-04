@@ -10,11 +10,12 @@ class Matrix:
 		----------
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
-			e.g. [[1,2,3], [4,5]]
+			e.g. [[1,2,3], [4,5,6]]
 		----------
 		
 		TODO
 		Handle matrices with rows/columns of different sizes (don't allow them)
+		Having columns of different sizes is not possible, so only need to restrict rows
 		"""
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
@@ -22,6 +23,10 @@ class Matrix:
 			raise Exception("Matrix must be a two-dimensional list")
 		
 		assert self.numRows != 0 and self.numCols != 0, "Matrix must have at least one row and column."
+		
+		# Ensure that the rows are uniform
+		for row in matrix:
+			assert len(row) == self.numCols, "All rows in the matrix must have the same length."
 
 		self.matrix = matrix
 

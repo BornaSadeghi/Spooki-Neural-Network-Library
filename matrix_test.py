@@ -9,13 +9,14 @@ class TestInit(unittest.TestCase):
         with self.assertRaises(Exception):
             Matrix([1,2,3])
             Matrix([]) 
-    def test_invalid_type(self):
-        with self.assertRaises(Exception):
-            Matrix("hello")
-            Matrix(True)
     def test_empty_row_or_column(self):
         with self.assertRaises(Exception):
             Matrix([[]])
+    def test_uneven_row_length(self):
+        with self.assertRaises(Exception):
+            Matrix([[1,2,3], [4,5]])
+        with self.assertRaises(Exception):
+            Matrix([[], [1,2,3]])
 
 class TestZeros(unittest.TestCase):
     def test_zeros_result(self):
