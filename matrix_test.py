@@ -1,4 +1,5 @@
-from NeuralNetwork.matrix import Matrix, dot, matrix_product
+from unittest.case import TestCase
+from NN.matrix import Matrix, dot, matrix_product
 import unittest
 
 # python3 -m unittest matrix_test.py
@@ -36,4 +37,8 @@ class TestDot(unittest.TestCase):
 class TestMatrixMultiplication(unittest.TestCase):
     def test_mat_mul(self):
         self.assertEqual( matrix_product(Matrix([[1,2], [3,4], [5,6]]), Matrix([[1,0,0], [2,1,3]])).get2dArray(), [[5,2,6], [11,4,12], [17,6,18]] )
-        self.assertEqual( matrix_product(Matrix([[2, -3, 0, 4]]), Matrix([[2],[4],[5],[-3]])).get2dArray(), [[-20]] )
+        self.assertEqual( matrix_product(Matrix([[2, -3, 0, 4]]), Matrix([[2],[4],[5],[-3]])).get2dArray(), [[-20]] ) 
+
+class TestTranspose(unittest.TestCase):
+    def test_transpose_result(self):
+        self.assertEqual( Matrix([[2,3], [4,5]]).transpose().get2dArray(), [[2,4], [3,5]])

@@ -1,5 +1,4 @@
-from NeuralNetwork.neural_network import NeuralNetwork
-from NeuralNetwork.neural_network import NeuralNetwork
+from NN.neural_network import NeuralNetwork
 import unittest
 
 # python3 -m unittest neural_network_test.py

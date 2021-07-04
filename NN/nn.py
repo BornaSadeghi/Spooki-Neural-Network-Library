@@ -3,20 +3,6 @@ import math, random
 def normalizeColour(colour):
     return colour[0]/255, colour[1]/255, colour[2]/255
 
-# activation functions
-
-def noFunc (x):
-    return x
-
-def sign(x):
-    return 1 if x >= 0 else -1
-
-def sigmoid (x):
-    return 1/(1+math.e**-x)
-
-def reLU (x):
-    return max(0,x)
-
 # Node/Perceptron class
 
 class Node:
