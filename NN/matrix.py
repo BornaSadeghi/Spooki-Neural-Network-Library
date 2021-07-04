@@ -52,13 +52,13 @@ class Matrix:
 		Parameters
 		----------
 		numRows: int
-			number of rows in the matrix
+			Number of rows in the matrix.
 		numCols: int
-			number of columns in the matrix
+			Number of columns in the matrix.
 		min: float
-			minimum value of the random number
+			Minimum value of the random number.
 		max: float
-			maximum value of the random number
+			Maximum value of the random number.
 		----------
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
@@ -95,7 +95,8 @@ class Matrix:
 
 		Parameters
 		----------
-		rowIndex: The index of the row to retrieve.
+		rowIndex: int
+			The index of the row to retrieve.
 		----------
 		"""
 		return self.matrix[rowIndex]
@@ -106,7 +107,9 @@ class Matrix:
 
 		Parameters
 		----------
-		colIndex: The index of the column to retrieve.
+		colIndex: int
+			The index of the column to retrieve.
+		----------
 		"""
 		return [ row[colIndex] for row in self.matrix ]
 
@@ -117,9 +120,10 @@ class Matrix:
 		Parameters
 		----------
 		row: int
-			The row to get the value from
+			The row to get the value from.
 		col: int
-			The column to get the value from
+			The column to get the value from.
+		----------
 		"""
 		try:
 			return self.matrix[row][col]
@@ -133,9 +137,10 @@ class Matrix:
 		Parameters
 		----------
 		row: int
-			The row to set the value at
+			The row to set the value at.
 		col: int
-			The column to set the value at
+			The column to set the value at.
+		----------
 		"""
 		try:
 			self.matrix[row][col] = value
@@ -179,9 +184,10 @@ def activation(matrix, activation_function):
 	Parameters
 	----------
 	matrix: list of lists
-		the matrix to apply the activation function on
+		The matrix to apply the activation function on
 	activation_function: function
-		the function to apply
+		The function to apply
+	----------
 	"""
 	for i in range (matrix.numRows):
 		for j in range (matrix.numCols):
