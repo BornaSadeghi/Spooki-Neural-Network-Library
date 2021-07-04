@@ -82,12 +82,12 @@ class Matrix:
 
 	def get2dArray(self):
 		"""
-		Return the 2D list representation of the matrix.
+		Return a copy of the 2D list representation of the matrix.
 
 		TODO
 		Return a deep copy of the matrix's 2D list
 		"""
-		return self.matrix
+		return Matrix(self.matrix).matrix
 
 	def getRow(self, rowIndex):
 		"""
@@ -151,12 +151,13 @@ class Matrix:
 		"""
 		Return the matrix in string form.
 		"""
-		s = "Matrix:\n"
+		s = "\nMatrix:"
 		for row in self.matrix:
+			s += "\n"
 			for value in row:
 				s += "%8.4f" %value
-			s += "\n"
 		return s
+	__repr__ = __str__ # Display matrix in string form inside lists and dicts
 
 def dot (list1, list2):
 	"""
@@ -174,12 +175,12 @@ def matrix_product (matrix1, matrix2):
 	matrix_product = Matrix.zeros(matrix1.numRows, matrix2.numCols)
 	for r in range (matrix1.numRows):
 		for c in range (matrix2.numCols):
-			matrix_product.matrix[r][c] = dot(matrix1.getRow(r), matrix2.getCol(c))
+			matrix_product.set(r,c, dot(matrix1.getRow(r), matrix2.getCol(c)))
 	return matrix_product
 
 def activation(matrix, activation_function):
 	"""
-	Run the each element of the matrix through an activation function.
+	Run each element of the matrix through an activation function.
 
 	Parameters
 	----------
