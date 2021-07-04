@@ -19,7 +19,7 @@ class Matrix:
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
 		except:
-			raise Exception("Matrix must have at least one row and one column.")
+			raise Exception("Matrix must be a two-dimensional list")
 
 		self.matrix = matrix
 
