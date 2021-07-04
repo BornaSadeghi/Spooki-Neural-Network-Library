@@ -8,6 +8,7 @@ class TestInit(unittest.TestCase):
     def test_invalid_shape(self):
         with self.assertRaises(Exception):
             Matrix([1,2,3])
+        with self.assertRaises(Exception):
             Matrix([]) 
     def test_empty_row_or_column(self):
         with self.assertRaises(Exception):

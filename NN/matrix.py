@@ -10,12 +10,11 @@ class Matrix:
 		----------
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
-			e.g. [[1,2,3], [4,5,6]]
+			e.g. [[1,2,3], [4,5,6], [7,8,9]] is equivalent to the matrix:
+			1 2 3
+			4 5 6
+			7 8 9
 		----------
-		
-		TODO
-		Handle matrices with rows/columns of different sizes (don't allow them)
-		Having columns of different sizes is not possible, so only need to restrict rows
 		"""
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
@@ -69,7 +68,6 @@ class Matrix:
 			# Replace it with the column of the same index
 			newMatrix.matrix[i] = self.getCol(i)
 		return newMatrix
-
 
 	def shape(self):
 		return len(self.matrix), len(self.matrix[0])
