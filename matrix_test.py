@@ -4,6 +4,19 @@ import unittest
 
 # python3 -m unittest matrix_test.py
 
+class TestInit(unittest.TestCase):
+    def test_invalid_shape(self):
+        with self.assertRaises(Exception):
+            Matrix([1,2,3])
+            Matrix([]) 
+    def test_invalid_type(self):
+        with self.assertRaises(Exception):
+            Matrix("hello")
+            Matrix(True)
+    def test_empty_row_or_column(self):
+        with self.assertRaises(Exception):
+            Matrix([[]])
+
 class TestZeros(unittest.TestCase):
     def test_zeros_result(self):
         self.assertEqual(Matrix.zeros(2,3).get2dArray(), Matrix([[0,0,0], [0,0,0]]).get2dArray())

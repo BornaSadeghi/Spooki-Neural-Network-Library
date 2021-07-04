@@ -20,6 +20,8 @@ class Matrix:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
 		except:
 			raise Exception("Matrix must be a two-dimensional list")
+		
+		assert self.numRows != 0 and self.numCols != 0, "Matrix must have at least one row and column."
 
 		self.matrix = matrix
 
