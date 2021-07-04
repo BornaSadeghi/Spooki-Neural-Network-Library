@@ -14,7 +14,7 @@ class TestInit(unittest.TestCase):
             Matrix("hello")
             Matrix(True)
     def test_empty_row_or_column(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(AssertionError):
             Matrix([[]])
 
 class TestZeros(unittest.TestCase):
