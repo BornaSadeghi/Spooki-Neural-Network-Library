@@ -40,6 +40,7 @@ class Matrix:
 			number of rows in the matrix
 		numCols: int
 			number of columns in the matrix
+		----------
 		"""
 		return cls([[0 for _ in range(numCols)] for _ in range (numRows)])
 
@@ -58,10 +59,14 @@ class Matrix:
 			minimum value of the random number
 		max: float
 			maximum value of the random number
+		----------
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
 	def transpose(self):
+		"""
+		Return the transpose of the matrix (with rows and columns swapped).
+		"""
 		newMatrix = Matrix.zeros(self.numCols, self.numRows)
 		# For each row,
 		for i in range(self.numCols):
@@ -70,9 +75,18 @@ class Matrix:
 		return newMatrix
 
 	def shape(self):
+		"""
+		Return the dimensions of the matrix (number of rows, number of columns)
+		"""
 		return len(self.matrix), len(self.matrix[0])
 
 	def get2dArray(self):
+		"""
+		Return the 2D list representation of the matrix.
+
+		TODO
+		Return a deep copy of the matrix's 2D list
+		"""
 		return self.matrix
 
 	def getRow(self, rowIndex):
@@ -82,6 +96,7 @@ class Matrix:
 		Parameters
 		----------
 		rowIndex: The index of the row to retrieve.
+		----------
 		"""
 		return self.matrix[rowIndex]
 
@@ -150,7 +165,7 @@ def matrix_product (matrix1, matrix2):
 	"""
 	The matrix product of two matrices.
 	"""
-	assert matrix1.numCols == matrix2.numRows
+	assert matrix1.numCols == matrix2.numRows, "For matrix multiplication, the number of columns in matrix 1 must equal the number of rows in matrix 2"
 	matrix_product = Matrix.zeros(matrix1.numRows, matrix2.numCols)
 	for r in range (matrix1.numRows):
 		for c in range (matrix2.numCols):
