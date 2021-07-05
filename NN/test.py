@@ -7,7 +7,4 @@ nn = NeuralNetwork([2,3,3])
 x = [0, 0]
 y = [1,4,9,16,25]
 
-print(x)
-print(nn.weights)
-
 print(nn.feedforward(x))
