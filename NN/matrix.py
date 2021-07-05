@@ -190,7 +190,7 @@ def activation(matrix, activation_function):
 		The function to apply
 	----------
 	"""
-	for i in range (matrix.numRows):
-		for j in range (matrix.numCols):
-			matrix.set(i,j, activation_function(matrix.get(i,j)))
+	for r in range (matrix.numRows):
+		for c in range (matrix.numCols):
+			matrix.set(r,c, activation_function(matrix.get(r,c)))
 	return matrix

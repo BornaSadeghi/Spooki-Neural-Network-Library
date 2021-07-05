@@ -1,6 +1,8 @@
 from unittest.case import TestCase
-from NN.matrix import Matrix, dot, matrix_product
+from NN.matrix import Matrix, activation, dot, matrix_product
 import unittest
+
+from NN.activations import sigmoid
 
 # python3 -m unittest matrix_test.py
 
@@ -62,3 +64,8 @@ class TestMatrixMultiplication(unittest.TestCase):
 class TestTranspose(unittest.TestCase):
     def test_transpose_result(self):
         self.assertEqual( Matrix([[2,3], [4,5]]).transpose().get2dArray(), [[2,4], [3,5]])
+
+class TestActivation(unittest.TestCase):
+    def test_sigmoid(self):
+        # TODO Simplify this test with numpy.testing.assert_almost_equal
+        self.assertListEqual( activation(Matrix([[-1,-0.2,3.333], [4.56,5,6]]), sigmoid).get2dArray(), [[0.2689414213699951, 0.45016600268752216, 0.9655437163718195],[0.9896462624689083, 0.9933071490757153, 0.9975273768433653]])
