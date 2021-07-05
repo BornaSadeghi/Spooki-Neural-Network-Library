@@ -31,9 +31,10 @@ class NeuralNetwork:
         Alternatively, make x have to be a one-dimensional list
         """
 
-        assert len(x[0]) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
+        assert len(x) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
 
-        x = Matrix(x).transpose()
+        # Turn x into an input layer matrix and transpose it to fit the network
+        x = Matrix([x]).transpose()
 
         # iterate through layers
         for layer_idx in range(len(self.shape)-1):
