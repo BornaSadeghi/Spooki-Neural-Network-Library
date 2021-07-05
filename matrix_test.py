@@ -8,14 +8,16 @@ class TestInit(unittest.TestCase):
     def test_invalid_shape(self):
         with self.assertRaises(Exception):
             Matrix([1,2,3])
-            Matrix([]) 
-    def test_invalid_type(self):
         with self.assertRaises(Exception):
-            Matrix("hello")
-            Matrix(True)
+            Matrix([]) 
     def test_empty_row_or_column(self):
         with self.assertRaises(AssertionError):
             Matrix([[]])
+    def test_uneven_row_length(self):
+        with self.assertRaises(Exception):
+            Matrix([[1,2,3], [4,5]])
+        with self.assertRaises(Exception):
+            Matrix([[], [1,2,3]])
 
 class TestZeros(unittest.TestCase):
     def test_zeros_result(self):
@@ -51,6 +53,11 @@ class TestMatrixMultiplication(unittest.TestCase):
     def test_mat_mul(self):
         self.assertEqual( matrix_product(Matrix([[1,2], [3,4], [5,6]]), Matrix([[1,0,0], [2,1,3]])).get2dArray(), [[5,2,6], [11,4,12], [17,6,18]] )
         self.assertEqual( matrix_product(Matrix([[2, -3, 0, 4]]), Matrix([[2],[4],[5],[-3]])).get2dArray(), [[-20]] ) 
+        self.assertEqual( matrix_product(Matrix([[0, 0], [0, 0]]), Matrix([[1,2,3], [4,5,6]])).get2dArray(), [[0,0,0], [0,0,0]] )
+        self.assertEqual( matrix_product(Matrix([[1,2], [4,5]]), Matrix([[0,0,0], [0,0,0]])).get2dArray(), [[0,0,0], [0,0,0]] )
+    def test_invalid_dimensions(self):
+        # TODO Ensure that an exception is thrown when matrices cannot be multiplied due to dimensional error
+        pass
 
 class TestTranspose(unittest.TestCase):
     def test_transpose_result(self):

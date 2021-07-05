@@ -7,7 +7,8 @@ class NeuralNetwork:
         Parameters
         ----------
         shape: list <int>
-        The shape of the neural network, where the i-th number is the number of nodes in the i-th layer
+            The shape of the neural network, where the i-th number is the number of nodes in the i-th layer
+        ----------
         """
         self.shape = shape
         
@@ -21,13 +22,16 @@ class NeuralNetwork:
         """
         Parameters
         ----------
-
         x: list <float>
-        The input data, a one-dimensional list in which the nth element is fed to the nth node in the input layer
+            The input data, a one-dimensional list in which the nth element is fed to the nth node in the input layer
+        ----------
+
+        TODO
+        Fix documentation, as x is not a one-dimensional list
+        Alternatively, make x have to be a one-dimensional list
         """
 
-        if len(x[0]) != self.shape[0]:
-            raise Exception("Input must be of shape (%d)" % self.shape[0])
+        assert len(x[0]) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
 
         x = Matrix(x).transpose()
 
@@ -43,11 +47,10 @@ class NeuralNetwork:
 
         Parameters
         ----------
-
         x: list <float>
-        Input data.
-
+            Input data.
         y: list <float>
-        Desired output data.
+            Desired output data.
+        ----------
         """
         pass

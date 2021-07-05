@@ -10,11 +10,11 @@ class Matrix:
 		----------
 		matrix: list of lists containing numbers
 			The list of rows to initialize the matrix with.
-			e.g. [[1,2,3], [4,5]]
+			e.g. [[1,2,3], [4,5,6], [7,8,9]] is equivalent to the matrix:
+			1 2 3
+			4 5 6
+			7 8 9
 		----------
-		
-		TODO
-		Handle matrices with rows/columns of different sizes (don't allow them)
 		"""
 		try:
 			self.numRows, self.numCols = len(matrix), len(matrix[0])
@@ -22,6 +22,10 @@ class Matrix:
 			raise Exception("Matrix must be a two-dimensional list")
 		
 		assert self.numRows != 0 and self.numCols != 0, "Matrix must have at least one row and column."
+		
+		# Ensure that the rows are uniform
+		for row in matrix:
+			assert len(row) == self.numCols, "All rows in the matrix must have the same length."
 
 		self.matrix = matrix
 
@@ -36,6 +40,7 @@ class Matrix:
 			number of rows in the matrix
 		numCols: int
 			number of columns in the matrix
+		----------
 		"""
 		return cls([[0 for _ in range(numCols)] for _ in range (numRows)])
 
@@ -47,17 +52,21 @@ class Matrix:
 		Parameters
 		----------
 		numRows: int
-			number of rows in the matrix
+			Number of rows in the matrix.
 		numCols: int
-			number of columns in the matrix
+			Number of columns in the matrix.
 		min: float
-			minimum value of the random number
+			Minimum value of the random number.
 		max: float
-			maximum value of the random number
+			Maximum value of the random number.
+		----------
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
 	def transpose(self):
+		"""
+		Return the transpose of the matrix (with rows and columns swapped).
+		"""
 		newMatrix = Matrix.zeros(self.numCols, self.numRows)
 		# For each row,
 		for i in range(self.numCols):
@@ -65,12 +74,20 @@ class Matrix:
 			newMatrix.matrix[i] = self.getCol(i)
 		return newMatrix
 
-
 	def shape(self):
+		"""
+		Return the dimensions of the matrix (number of rows, number of columns)
+		"""
 		return len(self.matrix), len(self.matrix[0])
 
 	def get2dArray(self):
-		return self.matrix
+		"""
+		Return a copy of the 2D list representation of the matrix.
+
+		TODO
+		Return a deep copy of the matrix's 2D list
+		"""
+		return Matrix(self.matrix).matrix
 
 	def getRow(self, rowIndex):
 		"""
@@ -78,7 +95,9 @@ class Matrix:
 
 		Parameters
 		----------
-		rowIndex: The index of the row to retrieve.
+		rowIndex: int
+			The index of the row to retrieve.
+		----------
 		"""
 		return self.matrix[rowIndex]
 
@@ -88,7 +107,9 @@ class Matrix:
 
 		Parameters
 		----------
-		colIndex: The index of the column to retrieve.
+		colIndex: int
+			The index of the column to retrieve.
+		----------
 		"""
 		return [ row[colIndex] for row in self.matrix ]
 
@@ -99,9 +120,10 @@ class Matrix:
 		Parameters
 		----------
 		row: int
-			The row to get the value from
+			The row to get the value from.
 		col: int
-			The column to get the value from
+			The column to get the value from.
+		----------
 		"""
 		try:
 			return self.matrix[row][col]
@@ -115,9 +137,10 @@ class Matrix:
 		Parameters
 		----------
 		row: int
-			The row to set the value at
+			The row to set the value at.
 		col: int
-			The column to set the value at
+			The column to set the value at.
+		----------
 		"""
 		try:
 			self.matrix[row][col] = value
@@ -128,12 +151,13 @@ class Matrix:
 		"""
 		Return the matrix in string form.
 		"""
-		s = "Matrix:\n"
+		s = "\nMatrix:"
 		for row in self.matrix:
+			s += "\n"
 			for value in row:
 				s += "%8.4f" %value
-			s += "\n"
 		return s
+	__repr__ = __str__ # Display matrix in string form inside lists and dicts
 
 def dot (list1, list2):
 	"""
@@ -147,23 +171,24 @@ def matrix_product (matrix1, matrix2):
 	"""
 	The matrix product of two matrices.
 	"""
-	assert matrix1.numCols == matrix2.numRows
+	assert matrix1.numCols == matrix2.numRows, "For matrix multiplication, the number of columns in matrix 1 must equal the number of rows in matrix 2"
 	matrix_product = Matrix.zeros(matrix1.numRows, matrix2.numCols)
 	for r in range (matrix1.numRows):
 		for c in range (matrix2.numCols):
-			matrix_product.matrix[r][c] = dot(matrix1.getRow(r), matrix2.getCol(c))
+			matrix_product.set(r,c, dot(matrix1.getRow(r), matrix2.getCol(c)))
 	return matrix_product
 
 def activation(matrix, activation_function):
 	"""
-	Run the each element of the matrix through an activation function.
+	Run each element of the matrix through an activation function.
 
 	Parameters
 	----------
 	matrix: list of lists
-		the matrix to apply the activation function on
+		The matrix to apply the activation function on
 	activation_function: function
-		the function to apply
+		The function to apply
+	----------
 	"""
 	for i in range (matrix.numRows):
 		for j in range (matrix.numCols):
