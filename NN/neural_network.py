@@ -13,10 +13,11 @@ class NeuralNetwork:
         self.shape = shape
         
         self.weights = []
+        self.outputs = [None for _ in range(len(shape))]
 
         # Randomly initialized weights
         for i in range (len(shape)-1):
-            self.weights.append(Matrix.rand(shape[i+1], shape[i]))
+            self.weights.append(Matrix.rand(shape[i+1], shape[i], -1, 1))
     
     def feedforward (self, x):
         """
@@ -30,13 +31,16 @@ class NeuralNetwork:
         assert len(x) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
 
         # Turn x into an input layer matrix and transpose it to fit the network
-        x = Matrix([x]).transpose()
+        self.outputs[0] = Matrix([x]).transpose()
 
         # iterate through layers
         for layer_idx in range(len(self.shape)-1):
-            x = activation(matrix_product(self.weights[layer_idx], x), sigmoid)
+            self.outputs[layer_idx+1] = activation(matrix_product(self.weights[layer_idx], self.outputs[layer_idx]), sigmoid)
 
-        return x
+        return self.outputs
+
+    def backpropagate(self):
+        pass
 
     def train(self, x, y):
         """
@@ -49,8 +53,5 @@ class NeuralNetwork:
         y: list <float>
             Desired output data.
         ----------
-
-        TODO
-        Rename to backpropagation and implement it.
         """
         pass
