@@ -25,10 +25,6 @@ class NeuralNetwork:
         x: list <float>
             The input data, a one-dimensional list in which the nth element is fed to the nth node in the input layer
         ----------
-
-        TODO
-        Fix documentation, as x is not a one-dimensional list
-        Alternatively, make x have to be a one-dimensional list
         """
 
         assert len(x) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
@@ -53,5 +49,8 @@ class NeuralNetwork:
         y: list <float>
             Desired output data.
         ----------
+
+        TODO
+        Rename to backpropagation and implement it.
         """
         pass
