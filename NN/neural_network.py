@@ -13,6 +13,7 @@ class NeuralNetwork:
         self.shape = shape
         
         self.weights = []
+        self.biases = []
         self.outputs = [None for _ in range(len(shape))]
 
         # Randomly initialized weights
@@ -39,7 +40,14 @@ class NeuralNetwork:
 
         return self.outputs
 
-    def backpropagate(self):
+    def backpropagate(self, y):
+        """
+        Parameters
+        ----------
+        y: list <float>
+            The expected output of the neural network.
+        ----------
+        """
         pass
 
     def train(self, x, y):

@@ -63,6 +63,25 @@ class Matrix:
 		"""
 		return cls([[random.uniform(min,max) for _ in range (numCols)] for _ in range(numRows)])
 
+	def add(self, matrix):
+		"""
+		Add a matrix of identical shape to this matrix.
+
+		Parameters
+		----------
+		matrix: Matrix object
+			The matrix to add with this one.
+		----------
+		"""
+		assert self.shape() == matrix.shape(), "Cannot add matrices of different shape."
+		newMatrix = Matrix(self.matrix)
+		numRows, numCols = newMatrix.shape()
+		for row in range(numRows):
+			for col in range(numCols):
+				newMatrix.matrix[row][col] += matrix.matrix[row][col]
+		return newMatrix
+				
+
 	def transpose(self):
 		"""
 		Return the transpose of the matrix (with rows and columns swapped).
