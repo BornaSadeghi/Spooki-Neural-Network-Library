@@ -18,7 +18,8 @@ class NeuralNetwork:
 
         # Randomly initialized weights
         for i in range (len(shape)-1):
-            self.weights.append(Matrix.rand(shape[i+1], shape[i], -1, 1))
+            self.weights.append(Matrix.rand(shape[i+1], shape[i]))
+            self.biases.append(Matrix.rand(shape[i+1], shape[i]))
     
     def feedforward (self, x):
         """

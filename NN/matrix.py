@@ -45,7 +45,7 @@ class Matrix:
 		return cls([[0 for _ in range(numCols)] for _ in range (numRows)])
 
 	@classmethod
-	def rand (cls, numRows, numCols, min=0, max=1):
+	def rand (cls, numRows, numCols, min=-1, max=1):
 		"""
 		Similar to .zeros, but initialize each value with a random floating-point number.
 
@@ -81,6 +81,16 @@ class Matrix:
 				newMatrix.matrix[row][col] += matrix.matrix[row][col]
 		return newMatrix
 				
+	def negative(self):
+		"""
+		Take the negative of this matrix.
+		"""
+		newMatrix = Matrix(self.matrix)
+		numRows, numCols = newMatrix.shape()
+		for row in range(numRows):
+			for col in range(numCols):
+				newMatrix.matrix[row][col] *= -1
+		return newMatrix
 
 	def transpose(self):
 		"""
