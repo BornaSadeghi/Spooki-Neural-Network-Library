@@ -12,9 +12,10 @@ class NeuralNetwork:
         """
         self.shape = shape
         
+        # List of n matrices, where n is the number of layers
         self.weights = []
 
-        # Randomly initialized weights
+        # Randomly initialized weights for each layer
         for i in range (len(shape)-1):
             self.weights.append(Matrix.rand(shape[i+1], shape[i]))
     
@@ -31,7 +32,7 @@ class NeuralNetwork:
         Alternatively, make x have to be a one-dimensional list
         """
 
-        assert len(x[0]) == self.shape[0], "Input must be of shape (1, %d)" % self.shape[0]
+        assert len(x[0]) == self.shape[0], "Input layer must be of shape (1, %d)" % self.shape[0]
 
         x = Matrix(x).transpose()
 
