@@ -1,11 +1,11 @@
 def mean_squared_error(y, y_prime):
     """
-    Return the mean of the squared difference between two vectors of identical size.
+    Return the mean of the squared difference between two vectors of identical length.
 
     Parameters
     ----------
     y: list
-        The expected values of the network.
+        The desired values of the network.
     y_prime: list
         The predicted values of the network.
     """
@@ -14,5 +14,5 @@ def mean_squared_error(y, y_prime):
 
     error = 0
     for i in range(n):
-        error += (y_prime[i]-y[i])**2/n
+        error += (y[i]-y_prime[i])**2/n
     return error

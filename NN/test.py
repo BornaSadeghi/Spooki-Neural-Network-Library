@@ -7,4 +7,5 @@ nn = NeuralNetwork([5,10,5])
 x = [1,2,3,4,5]
 y = [1,4,9,16,25]
 
-print(nn.feedforward(x))
+nn.feedforward(x)
+nn.backpropagate(y)

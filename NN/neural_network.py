@@ -1,5 +1,5 @@
 from matrix import Matrix, matrix_product, activation
-from activations import sigmoid
+from activations import sigmoid, sigmoid_derivative, sigmoid_inverse
 
 class NeuralNetwork:
     def __init__(self, shape=[1]):
@@ -19,7 +19,7 @@ class NeuralNetwork:
         # Randomly initialized weights
         for i in range (len(shape)-1):
             self.weights.append(Matrix.rand(shape[i+1], shape[i]))
-            self.biases.append(Matrix.rand(shape[i+1], shape[i]))
+            self.biases.append(Matrix.rand(shape[i+1], 1))
     
     def feedforward (self, x):
         """
@@ -37,7 +37,7 @@ class NeuralNetwork:
 
         # iterate through layers
         for layer_idx in range(len(self.shape)-1):
-            self.outputs[layer_idx+1] = activation(matrix_product(self.weights[layer_idx], self.outputs[layer_idx]), sigmoid)
+            self.outputs[layer_idx+1] = activation(matrix_product(self.weights[layer_idx], self.outputs[layer_idx]).add(self.biases[layer_idx]), sigmoid)
 
         return self.outputs
 
@@ -49,7 +49,21 @@ class NeuralNetwork:
             The expected output of the neural network.
         ----------
         """
-        pass
+        assert self.outputs[0] != None, "You must feedforward before backpropagating."
+        assert len(y) == len(self.outputs[-1].get2dArray())
+
+        output_layer_array = self.outputs[-1].transpose().get2dArray()[0]
+
+        print(output_layer_array)
+
+        delta = 0
+        # For final layer
+        for i in range(len(y)):
+            delta += -2*(y[i] - output_layer_array[i])*sigmoid_derivative(sigmoid_inverse(output_layer_array[i]))
+        
+        print(delta)
+
+
 
     def train(self, x, y):
         """

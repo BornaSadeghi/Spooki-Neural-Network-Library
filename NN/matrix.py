@@ -73,13 +73,24 @@ class Matrix:
 			The matrix to add with this one.
 		----------
 		"""
-		assert self.shape() == matrix.shape(), "Cannot add matrices of different shape."
+		assert self.shape() == matrix.shape(), "Cannot add matrices of different shape: {} and {}".format(self.shape(), matrix.shape())
 		newMatrix = Matrix(self.matrix)
 		numRows, numCols = newMatrix.shape()
 		for row in range(numRows):
 			for col in range(numCols):
 				newMatrix.matrix[row][col] += matrix.matrix[row][col]
 		return newMatrix
+
+	def sum(self):
+		"""
+		Sum of all the values inside the matrix.
+		"""
+		sum = 0
+		numRows, numCols = self.shape()
+		for row in range(numRows):
+			for col in range(numCols):
+				sum += self.matrix[row][col]
+		return sum
 				
 	def negative(self):
 		"""
